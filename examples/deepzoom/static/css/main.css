@@ -1,0 +1,445 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #999999;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  zoom: 1;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+  height: 100vh;
+  background-color: #faf9f9;
+}
+
+.thumbnail {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.thumbnail .caption {
+  padding: 3px;
+}
+
+.caption > span {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #737373;
+}
+
+.panel-heading {
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0;
+  margin: 0;
+}
+
+.col-md-9 {
+  margin: 0;
+  padding: 0;
+  /* position: relative; */
+  /* height: calc(100vh - 10px - 50px); */
+}
+
+.col-md-3 {
+  margin: 0;
+  /* position: relative; */
+  padding: 0;
+  /* height: calc(100vh - 10px - 50px); */
+  border-left: 1px solid #eee;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.bolder {
+  font-weight: 800
+}
+
+.light {
+  font-weight: 300
+}
+
+#title {
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: 400;
+}
+
+#login {
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: 400;
+}
+
+#signup {
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: 400;
+}
+
+#gotolist {
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: 700;
+  color: white;
+}
+
+.navbar-default {
+  margin-bottom: unset;
+}
+
+.active #gotolistLink {
+  font-weight: 700;
+  color: white;
+  background-color: #989898 !important;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  border: unset;
+  background-color: #eeeeee;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  color: #123456;
+  background-color: #eeeeee;
+}
+
+.nav-tabs>li {
+  width: 49.5%;
+}
+
+.nav-tabs {
+  background: #eeeeee;
+  color: white;
+  font-family: 'NanumSquare', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+#description {
+  border-right: 1px dotted #888888;
+  border-left: 1px dotted #888888;
+}
+
+#annotationList {
+  border-right: 1px dotted #888888;
+}
+
+#menuHideButton {
+  cursor: pointer;
+}
+
+#menuShowButton {
+  cursor: pointer;
+}
+
+#descriptionPatientHistory {
+  margin-top: unset;
+  font-family: 'NanumSquare', sans-serif;
+}
+
+.panel {
+  border: unset;
+  border-radius: unset;
+  box-shadow: unset;
+}
+
+.panel-heading {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+#headingTwo {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+
+.panel-default {
+  border-color: unset;
+  border-radius: unset;
+}
+
+.panel-group .panel + .panel {
+  margin-top: unset;
+}
+
+.panel-group .panel-heading + .panel-collapse > .list-group, .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border-top: 1px solid #eee;
+}
+
+.panel-title>a {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+#accordion {
+  height: 100%;
+}
+
+#descriptionPatientHistory {
+  position: relative;
+}
+
+/* .panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
+    font-size: 1rem;
+} */
+
+.mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1em;
+}
+
+/* Switch starts here */
+
+.rocker {
+  display: inline-block;
+  position: relative;
+  /*
+    SIZE OF SWITCH
+    ==============
+    All sizes are in em - therefore
+    changing the font-size here
+    will change the size of the switch.
+    See .rocker-small below as example.
+    */
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #888;
+  width: 10em;
+  height: 4em;
+  overflow: hidden;
+  border-bottom: 0.5em solid #eee;
+}
+
+.rocker-small {
+  font-size: 0.75em;
+  /* Sizes the switch */
+  margin: 1em;
+}
+
+.rocker::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #999;
+  border: 0.5em solid #eee;
+  border-bottom: 0;
+}
+
+.rocker input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-left, .switch-right {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+  width: 5.19em;
+  transition: 0.2s;
+}
+
+.switch-left {
+  height: 2.5em;
+  width: 3.5em;
+  left: 0.85em;
+  bottom: 0.4em;
+  background-color: #ddd;
+  transform: rotate(15deg) skewX(15deg);
+}
+
+.switch-right {
+  right: 0.5em;
+  bottom: 0;
+  background-color: #aaaaaa;
+  color: #fff;
+}
+
+.switch-left::before, .switch-right::before {
+  content: "";
+  position: absolute;
+  width: 0.4em;
+  height: 2.45em;
+  bottom: -0.45em;
+  background-color: #ccc;
+  transform: skewY(-65deg);
+}
+
+.switch-left::before {
+  left: -0.4em;
+}
+
+.switch-right::before {
+  right: -0.375em;
+  background-color: transparent;
+  transform: skewY(65deg);
+}
+
+input:checked+.switch-left {
+  background-color: #aaaaaa;
+  color: #fff;
+  bottom: 0px;
+  left: 0.5em;
+  height: 2.5em;
+  width: 6em;
+  transform: rotate(0deg) skewX(0deg);
+}
+
+input:checked+.switch-left::before {
+  background-color: transparent;
+  width: 3.0833em;
+}
+
+input:checked+.switch-left+.switch-right {
+  background-color: #ddd;
+  color: #888;
+  bottom: 0.4em;
+  right: 0.8em;
+  height: 2.4em;
+  width: 2.75em;
+  transform: rotate(-15deg) skewX(-15deg);
+}
+
+input:checked+.switch-left+.switch-right::before {
+  background-color: #ccc;
+}
+
+/* Keyboard Users */
+
+input:focus+.switch-left {
+  color: #333;
+}
+
+input:checked:focus+.switch-left {
+  color: #fff;
+}
+
+input:focus+.switch-left+.switch-right {
+  color: #fff;
+}
+
+input:checked:focus+.switch-left+.switch-right {
+  color: #333;
+}
+
+#triangle {
+  width: 0;
+  height: 0;
+  border: 20px solid #aaaaaa;
+  border-left: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-bottom-right-radius: 2px;
+}
+
+#triangle2 {
+  width: 0;
+  height: 0;
+  border: 20px solid #aaaaaa;
+  border-left: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-bottom-right-radius: 2px;
+}
+
+.help-block {
+  margin-top: unset;
+  margin-bottom: unset;
+}
+
+.panel-group .panel {
+  border-radius: unset;
+}
+
+@media only screen and (min-width: 320px) {
+  .wrapper {
+    width: 100%;
+    height: 30vh;
+  }
+  #descriptionPatientHistory {
+    height: calc(55vh);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .wrapper {
+    width: 100%;
+    height: 30vh;
+  }
+  #descriptionPatientHistory {
+    height: calc(55vh);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    width: 100%;
+    height: 30vh;
+  }
+  #descriptionPatientHistory {
+    height: calc(55vh);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {
+  .wrapper {
+    width: 100%;
+    height: calc(100vh - 10px - 50px);
+  }
+
+  #descriptionPatientHistory {
+    height: calc(100vh - 44px - 40px - 60px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+/* Large Devices, Wide Screens */
+
+@media only screen and (min-width: 1200px) {
+  .wrapper {
+    width: 100%;
+    height: calc(100vh - 10px - 50px);
+  }
+  #descriptionPatientHistory {
+    height: calc(100vh - 44px - 40px - 60px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}

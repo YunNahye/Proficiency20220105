@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>권한이 없습니다.</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='annotorious/css/theme-dark/annotorious-dark.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='annotorious/example/highlight.js/zenburn.css') }}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://kit.fontawesome.com/ac4f635b3d.js"></script>
+    <style>
+        h4 {
+            margin-bottom: 7.5rem;
+            color: #585857;
+            font-family: 'NanumSquare';
+            font-weight: 500;
+        }
+
+        strong {
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body style="padding: 15px; background-color: #e2e1e0; overflow-y: scroll;">
+    <img class="img-responsive center-block"
+        style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); transition: all 0.3s cubic-bezier(.25, .8, .25, 1);"
+        src="{{ url_for('static', filename='images/guide/guide_000.png') }}" alt="">
+
+    <h4>1. 좌측 상단 <strong>설정아이콘</strong>을 누르고 <strong>인터넷 옵션</strong>을 클릭합니다.</h4>
+
+    <img class="img-responsive center-block" src="{{ url_for('static', filename='images/guide/guide_001.png') }}" alt="">
+
+    <h4>2. <strong>보안</strong>탭을 클릭하고 <strong>사용자 지정 수준(C)...</strong>을 클릭합니다.</h4>
+
+    <img class="img-responsive center-block" src="{{ url_for('static', filename='images/guide/guide_002.png') }}" alt="">
+
+    <h4>3. <strong>도메인 간의 데이터 원본 엑세스</strong> 밑 <strong>사용</strong>을 체크해주세요.</h4>
+
+    <h4>4. 키보드 <strong>F5</strong>를 눌러주세요. (새로고침)</h4>
+
+    <h4 class="text-center" style="margin-bottom: 5px; font-weight: 900;">문의전화 : 031-216-0098</h4>
+
+    <img class="img-responsive center-block"
+        style="margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); transition: all 0.3s cubic-bezier(.25, .8, .25, 1);"
+        src="{{ url_for('static', filename='images/logo_humintec.jpg') }}" alt="">
+
+</body>
+
+</html>

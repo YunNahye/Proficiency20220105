@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>ISO 15189 평가 - {{ qname }}</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='annotorious/css/theme-dark/annotorious-dark.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='annotorious/example/highlight.js/zenburn.css') }}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://kit.fontawesome.com/ac4f635b3d.js"></script>
+</head>
+
+<body style="zoom: 1; -ms-user-select: auto;">
+
+    <!-- TOP SYSTEM NAVIGATION -->
+    <nav class="navbar navbar-default" style="border-top: 10px solid #989898;">
+        <div class="container-fluid">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/" style="padding: unset; padding: 1rem;">
+                    <img class="img-responsive brand-img"
+                        style="height: 3rem; -webkit-filter: contrast(4); filter: contrast(4); -webkit-filter: grayscale(100%); filter: grayscale(100%); -webkit-filter: opacity(.5); filter: opacity(.5)"
+                        src="{{ url_for('static', filename='images/pathology_black.png') }}" alt="">
+                </a>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <div id="title" class="navbar-brand" style="font-weight: 900; margin-right: 1rem;">대한병리학회 ISO 15189 평가 - {{qname}} (id : {{username}})</div>
+
+                <!-- <a id="title" onclick="openGuidePopup();" class="navbar-brand"
+                        style="font-weight: 900; background-color: #989898; padding-top: 14px;">
+                        <span class="glyphicon glyphicon-eye-close"
+                            style="font-weight: 500; color: white; font-size: 1.5rem;"></span>
+                        <span style="font-weight: 700; color: white; font-size: 1.5rem;">이미지가 안보이시나요?</span>
+                    </a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left">
+                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li onclick="openGuidePopup();" class="active"
+                            style="cursor: pointer; background-color: #989898;">
+                            <a style="background: #989898;">
+                                <span class="glyphicon glyphicon-eye-close"
+                                    style="font-weight: 500; color: white; font-size: 1.5rem;"></span>
+                                <span
+                                    style="font-family: 'NanumSquare'; font-weight: 900; color: white; font-size: 1.5rem;">이미지가
+                                    안보이시나요?</span>
+                            </a>
+                        </li>
+                        <li id="login"><a href="/login" style="font-weight: 900;">로그아웃</a></li>
+                    </ul>
+                </ul>
+                <!-- <select id="which_type" onchange="selectBoxChange_type()"
+                    style="display:inline-block;width:150px;height:30px;margin-top:10px">
+                    {% if type=="HE" %}
+                    <option selected value='HE'>진단모듈 - 생검</option>
+                    <option value='HER'>진단모듈 - HER면역</option>
+                    {% else %}
+                    <option value='HE'>진단모듈 - 생검</option>
+                    <option selected value='HER'>진단모듈 - HER면역</option>
+                    {%endif%}
+                </select> -->
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+
+
+
+
+    </nav>
+
+
+
+    <div class="row" style="margin: 0; padding: 0;">
+        <!-- LEFT SIDE -->
+        <div class="col-md-9" style="position: relative;">
+
+            <div class="wrapper">
+                <div id="openseadragonViewer" style="background: white; height: 100%; position: relative;">
+
+                </div>
+            </div>
+
+            <!-- TOGGLE BUTTON FOR SHOW AND HIDE -->
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-md-3" style="position: relative; height: calc(100vh - 10px - 50px);">
+
+            <!-- SMALL MENU FOR DESKTOP -->
+            <div id="smallMenuForDesktop" class="text-center"
+                style="padding-left: 10px; padding-right: 10px; height: calc(100vh - 10px - 50px); padding-top: 4px; background-color: #eeeeee;">
+                <div class="expendRightMenu"
+                    style="cursor: pointer; background-color: #eeeeee; border-bottom: 1px dotted #888888; padding-bottom: 8px;">
+                    <span style="color: black; font-size: 2.5rem; top: 4px;" class="glyphicon glyphicon-log-out"></span>
+                </div>
+
+                <div class="expendRightMenu"
+                    style="cursor: pointer; margin-top: 8px;  background-color: #eeeeee; border-bottom: 1px dotted #888888; padding-bottom: 8px;">
+                    <span style="color: black; font-size: 2.5rem;" class="glyphicon glyphicon-th-list"></span>
+                </div>
+
+                <div class="expendRightMenu"
+                    style="cursor: pointer; margin-top: 8px;  background-color: #eeeeee; border-bottom: 1px dotted #888888; padding-bottom: 8px;">
+                    <span style="color: black; font-size: 2.5rem;" class="glyphicon glyphicon-pencil"></span>
+                </div>
+            </div>
+
+            <!-- SMALL MENU FOR MOBILE -->
+            <div id="smallMenuForMobile" class="text-center" style="width: 95vh; background-color: #eeeeee;">
+
+                <div class="expendRightMenu"
+                    style="width: 33%; float: left; cursor: pointer; background-color: #eeeeee; border-bottom: 1px dotted #888888; padding-bottom: 8px;">
+                    <span style="color: black; font-size: 2.5rem; top: 4px;" class="glyphicon glyphicon-log-out"></span>
+                </div>
+
+                <div class="expendRightMenu"
+                    style="width: 33%; float: left; cursor: pointer;  background-color: #eeeeee; border-bottom: 1px dotted #888888; padding-bottom: 8px;">
+                    <span style="color: black; font-size: 2.5rem;  top: 4px;"
+                        class="glyphicon glyphicon-th-list"></span>
+                </div>
+
+                <div class="expendRightMenu"
+                    style="width: 33%; float: left; cursor: pointer;  background-color: #eeeeee; border-bottom: 1px dotted #888888; padding-bottom: 8px;">
+                    <span style="color: black; font-size: 2.5rem; top: 4px;" class="glyphicon glyphicon-pencil"></span>
+                </div>
+
+                <div style="clear: both;"></div>
+            </div>
+
+
+            <div id="rightSideWholeMenu">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" style="height: 44px;">
+                    <li id="description" role="presentation" class="viewerMenu active text-center" style="width: 84.5%">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="font-weight: 900;">
+                            DESCRIPTION
+                        </a>
+                    </li>
+
+                    <li class="viewerMenu active text-center" style="width: 15%;">
+                        <span id="menuHideButton" style="color: black; padding: 0.5rem; font-size: 2.5rem; top: 4px;"
+                            class="glyphicon glyphicon-log-in"></span>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div id="descriptionPatientHistory" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                             <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingfour"
+                                    style="border-top: 1px solid #eee;">
+
+                                    <div style="float: left; color: black;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
+                                            aria-controls="collapseFour">
+                                            <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
+                                            <span style="font-weight: 700; color: #737373;">QUESTION LIST</span>
+                                        </a>
+                                    </div>
+
+                                    <div style="float: right;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
+                                            aria-controls="collapseFour">
+                                            <span class="label label-default"
+                                                style="cursor: pointer; font-weight: 900;">+</span>
+                                        </a>
+                                    </div>
+
+                                    <div style="clear: both;">
+                                    </div>
+
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel"
+                                    aria-labelledby="headingfour">
+                                    <div class="panel-body" style="padding: 0.5rem; position: relative;">
+
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <button type = "button" id = "go_prev" class = "btn btn-primary btn-sm" style = "width:20%;margin-left:10%">PREV</button>
+                                                <select id="Qlist_selBox" onchange="selectBoxChange()"
+                                                    style="display:inline-block;width:40%;height:30px;margin:0 auto;text-align-last:center">
+                                                    {% for question in questionList %}
+                                                    {% if question.type == type %}
+
+                                                    {% if qid==question.qid %}
+                                                    <option selected value='/{{question.url}}'>{{question.name}}
+                                                    </option>
+                                                    {% else %}
+                                                    <option value='/{{question.url}}'>{{question.name}}</option>
+                                                    {% endif %}
+                                                    {% else %}
+                                                    {% endif %}
+
+                                                    {% endfor %}
+                                                </select>
+                                                <button type = "button" id = "go_next" class = "btn btn-primary btn-sm" style = "width:20%;">NEXT</button>
+                                            <li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="answer_panel">
+
+                                    <div style="float: left; color: black;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                                            aria-controls="collapseThree">
+                                            <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
+                                            <span style="font-weight: 700; color: #737373;">ANSWER</span>
+                                        </a>
+                                    </div>
+
+                                    <div style="float: right;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                                            aria-controls="collapseThree">
+                                            <span class="label label-default"
+                                                style="cursor: pointer; font-weight: 900;">+</span> </a>
+                                    </div>
+
+                                    <div style="clear: both;">
+                                    </div>
+
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel"
+                                    aria-labelledby="answer_panel">
+
+                                    <div class="panel-body">
+
+                                        <ul class="list-unstyled">
+                                            <form id="answerForm" action="/submit" method="post"
+                                                style="width:260px;margin:0 auto" target="hiddenifr">
+
+                                                {% if type =="HER2" %}
+                                                <div style="text-align: center">
+                                                    <input type="radio" name="question" id="question0" style="margin-left:15px" value="0"  {% if stored_answer=="0" %}checked{% endif %}></input> <label for="question0">0</label>
+                                                    <input type="radio" name="question" id="question1" style="margin-left:15px" value="1+" {% if stored_answer=="1+" %}checked{% endif %}></input> <label for="question1">1+</label>
+                                                    <input type="radio" name="question" id="question2" style="margin-left:15px" value="2+" {% if stored_answer=="2+" %}checked{% endif %}></input> <label for="question2">2+</label>
+                                                    <input type="radio" name="question" id="question3" style="margin-left:15px" value="3+" {% if stored_answer=="3+" %}checked{% endif %}></input> <label for="question3">3+</label>
+                                                </div>
+                                                {% else %}
+
+                                                    {% if stored_answer!=None %}
+                                                    <textarea type="text" rows = 4 name="question"
+                                                        style="width: 250px;margin:0 auto">{{stored_answer}}</textarea>
+                                                    {% else %}
+                                                    <textarea type="text" rows = 4 name="question"
+                                                        style="width: 250px;margin:0 auto"></textarea>
+                                                    {% endif %}
+
+                                                {% endif %}
+                                                <input type="text" name="qid" value='{{qid}}'
+                                                    style="display:none"></input>
+                                                <iframe name="hiddenifr" style="display:none">
+                                                </iframe>
+                                            </form>
+
+
+                                        </ul>
+                                        <input id="submitBtn" type="button" value="제출"
+                                            style="width:100px; margin:0 auto;margin-top:15px; display:block">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+
+                                    <div style="float: left; color: black;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
+                                            <span style="font-weight: 700; color: #737373;">PATIENT HISTORY</span>
+                                        </a>
+                                    </div>
+
+                                    <div style="float: right;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            <span class="label label-default"
+                                                style="cursor: pointer; font-weight: 900;">+</span> </a>
+                                    </div>
+
+                                    <div style="clear: both;">
+                                    </div>
+
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                    aria-labelledby="headingOne">
+
+                                    <div class="panel-body">
+
+                                        <ul class="list-unstyled">
+                                            <li><strong>Age: </strong> {{ age }}</li>
+                                            <hr>
+                                            <li><strong>Sex: </strong> {{ sex }}</li>
+                                            <hr>
+                                            <li><strong>Organ: </strong> {{ organ }}</li>
+                                            <hr>
+                                            <li><strong>Clinical Notes: </strong> {{ clinical_note }}</li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo"
+                                    style="border-top: 1px solid #eee;">
+
+                                    <div style="float: left; color: black;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                            <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
+                                            <span style="font-weight: 700; color: #737373;">ANOTHER IMAGE LIST</span>
+                                        </a>
+                                    </div>
+
+                                    <div style="float: right;">
+                                        <a style="text-decoration: none; color: black;" role="button"
+                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                            <span class="label label-default"
+                                                style="cursor: pointer; font-weight: 900;">+</span>
+                                        </a>
+                                    </div>
+
+                                    <div style="clear: both;">
+                                    </div>
+
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel"
+                                    aria-labelledby="headingTwo">
+                                    <div class="panel-body" style="padding: 0.5rem; position: relative;">
+
+                                        <div class="row">
+
+                                            {% for slide in slides %}
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="thumbnail">
+                                                    <img src="{{ question_url+'/'+slide.name + '_files/8/0_0.jpeg'}}"
+                                                        alt="{{slide_url_remove_dzi}}"
+                                                        style="min-height: 15rem; max-height: 15rem; min-width: 100%; object-fit: cover;"
+                                                        onclick="changeViewer('{{ question_url+'/'+slide.name }}', '{{ slide.meta_data }}');">
+                                                    <div class="caption text-center">
+                                                        <span class="slideFileName"
+                                                            style="text-overflow: ellipsis; overflow: hidden; display: block; white-space: nowrap;">{{ loop.index}}{{". "}}{{slide.name.split(" ")[-2]}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="text-center center-block"
+                    style="padding-top: 5px; padding-bottom: 5px; max-height: 40px; filter: alpha(opacity=70); opacity: 0.7; left: 50%; transform: translateX(-50%); position: absolute; width: 300px;">
+
+                    <div class="text-center"
+                        style="margin-bottom: unset; font-size: 1rem; font-family: 'NanumSquare', sans-serif; font-weight: 700;">
+
+                        <div style="min-height: 100%; float: left; width: 53%; border-right: 1px solid #aaaaaa;">
+                            <img class="img-responsive center-block"
+                                style="height: 2.5rem; -webkit-filter: opacity(.5); filter: opacity(.5)"
+                                src="{{ url_for('static', filename='images/pathology_black_fixed_2_ultra.png') }}"
+                                alt="">
+                        </div>
+
+                        <div style="min-height: 100%; float: left; width: 46%;">
+                            <img class="img-responsive center-block"
+                                style="height: 2.5rem; -webkit-filter: contrast(4); filter: contrast(4); -webkit-filter: grayscale(100%); filter: grayscale(100%); -webkit-filter: opacity(.7); filter: opacity(.7);"
+                                src="{{ url_for('static', filename='images/logo_humintec_5.png') }}" alt="">
+                        </div>
+
+                        <div style="clear: both;">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- OPENSEADRAGON -->
+    <script type="text/javascript"
+        src="{{ url_for('static', filename='openseadragon/openseadragon_newest.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ url_for('static', filename='openseadragon/openseadragon-scalebar.js') }}"></script>
+
+    <!-- ANNOTORIOUS -->
+    <script type="text/javascript" src="{{ url_for('static', filename='annotorious/annotorious-dev.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ url_for('static', filename='annotorious/example/highlight.js/highlight.pack.js') }}"></script>
+
+    <!-- ANNOTORIOUS SELECTPACK -->
+    <!-- <script type="text/javascript"
+        src="{{ url_for('static', filename='annotorious-selector-pack/polygon_selector.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ url_for('static', filename='annotorious-selector-pack/freehand_selector.js') }}"></script> -->
+
+    <script type="text/javascript">
+        let labelTitle = "{{ slide_filename }}";
+        let logoPath = "{{ url_for('static', filename='images/pathology_black.png') }}";
+
+        parse_original = labelTitle.split(" ")
+        parse_original[0] = ""
+        parse_original[1] = ""
+        parse_original[parse_original.length - 1] = ""
+        labelTitle = parse_original.join(" ")
+        var labelSrc =
+            '<div style="border: 2px solid #989898; padding: 1rem; position: relative; margin-left: 5px; position: absolute; bottom: 5px; z-index: 9999; right: 5px; background-color: white;">' +
+
+            '<img class="img-responsive center-block" style="height: 6rem; -webkit-filter: opacity(.5); filter: opacity(.5)" src="' + logoPath + '" alt="">' +
+            '<hr style="margin-top: 0.75rem; margin-bottom: 0.75rem;"/>' +
+            '<div class="text-center" style="color: #34302d; font-family: \'NanumSquare\'; font-weight: 700;">' + labelTitle + '</div>'
+        '</div>';
+
+        var _slideImgName = "{{ slide_url }}";
+
+        //console.log('_slideImgName: ', _slideImgName);
+
+        var viewer = null;
+
+        function changeViewer(slideName, meta_data) {
+
+            //console.log('this file is .svs');
+            //console.log(_slideImgName);
+            let question_url = "{{ question_url }}";
+            _slideImgName = slideName + '.dzi'
+
+            parse_original = slideName.split(" ")
+            parse_original[0] = ""
+            parse_original[1] = ""
+            parse_original[parse_original.length - 1] = ""
+            labelTitle = parse_original.join(" ")
+
+            var labelSrc =
+                '<div style="border: 2px solid #989898; padding: 1rem; position: relative; margin-left: 5px; position: absolute; bottom: 5px; z-index: 9999; right: 5px; background-color: white;">' +
+
+                '<img class="img-responsive center-block" style="height: 6rem; -webkit-filter: opacity(.5); filter: opacity(.5)" src="' + logoPath + '" alt="">' +
+                '<hr style="margin-top: 0.75rem; margin-bottom: 0.75rem;"/>' +
+                '<div class="text-center" style="color: #34302d; font-family: \'NanumSquare\'; font-weight: 700;">' + labelTitle + '</div>'
+            '</div>';
+
+            $("#openseadragonViewer").html("");
+            $("#openseadragonViewer").html(labelSrc);
+            viewer = null;
+            viewer = new OpenSeadragon({
+                id: "openseadragonViewer",
+                tileSources: _slideImgName,
+                prefixUrl: "{{ url_for('static', filename='images/') }}",
+                showNavigator: true,
+                showRotationControl: true,
+                animationTime: 0.5,
+                autoHideControls: false,
+                blendTime: 0.1,
+                constrainDuringPan: true,
+                maxZoomPixelRatio: 2,
+                visibilityRatio: 1,
+                zoomPerScroll: 2,
+                timeout: 120000,
+            });
+
+            viewer.addHandler("open", function () {
+                viewer.source.minLevel = 8;
+            });
+
+        }
+
+        //hljs.initHighlightingOnLoad();
+
+        var status = "";
+
+        $(document).ready(function () {
+            // alert(_slideImgName)
+            $("#openseadragonViewer").html("");
+            $("#openseadragonViewer").html(labelSrc);
+            viewer = new OpenSeadragon({
+                id: "openseadragonViewer",
+                crossOriginPolicy: false,
+                ajaxWithCredentials: false,
+                tileSources: _slideImgName,
+                prefixUrl: "{{ url_for('static', filename='images/') }}",
+                showNavigator: true,
+                showRotationControl: true,
+                animationTime: 0.5,
+                autoHideControls: false,
+                blendTime: 0.1,
+                constrainDuringPan: true,
+                maxZoomPixelRatio: 2,
+                visibilityRatio: 1,
+                zoomPerScroll: 2,
+                timeout: 120000,
+            });
+
+            // OSD SCALEBAR
+            var mpp = parseFloat("{{ slide_mpp }}");
+            viewer.scalebar({
+                pixelsPerMeter: mpp ? (1e6 / mpp) : 0,
+                xOffset: 30,
+                yOffset: 30,
+                barThickness: 5,
+                color: '#555555',
+                fontColor: '#333333',
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            });
+        });
+
+
+        // SETTING WINDOW FOR MOBILE AND DESKTOP
+        $(window).resize(function () {
+            if (status === 'hide') {
+                if (window.innerWidth >= 992) {
+                    $("#smallMenuForDesktop").hide();
+                    $("#smallMenuForMobile").hide();
+
+                    $("#rightSideWholeMenu").show();
+
+                    $(".col-md-3").css("width", "52%");
+                    $(".col-md-3").css("text-align", "center");
+                    $(".col-md-9").css("width", "95%");
+
+                    status = "hide";
+                } else {
+                    $("#smallMenuForDesktop").hide();
+                    $("#smallMenuForMobile").hide();
+
+                    $("#rightSideWholeMenu").hide();
+
+                    $(".col-md-3").css("width", "5%");
+                    $(".col-md-3").css("text-align", "center");
+                    $(".col-md-9").css("width", "100%");
+                    $(".col-md-9").css("height", "calc(95vh - 10px - 50px)");
+                    $("#openseadragonViewer").css("height", "calc(100vh - 10px - 50px)");
+                    status = "hide";
+                }
+            } else {
+                if (window.innerWidth >= 992) {
+                    $("#smallMenuForDesktop").hide();
+                    $("#smallMenuForMobile").hide();
+
+                    $("#rightSideWholeMenu").show();
+
+                    $(".col-md-9").css("width", "75%");
+                    $(".col-md-9").css("height", "calc(100vh - 10px - 50px)");
+                    $("#openseadragonViewer").css("height", "calc(100vh - 10px - 50px)");
+                    $(".col-md-3").css("text-align", "unset");
+                    $(".col-md-3").css("width", "25%");
+                    status = "show";
+                } else {
+                    $("#smallMenuForDesktop").hide();
+                    $("#smallMenuForMobile").hide();
+
+                    $("#rightSideWholeMenu").show();
+
+                    $(".col-md-3").css("width", "100%");
+                    $(".col-md-3").css("text-align", "unset");
+                    $(".col-md-9").css("width", "100%");
+                    $(".col-md-9").css("height", "30vh");
+                    $("#openseadragonViewer").css("height", "30vh");
+                    status = "show";
+                }
+            }
+        });
+
+        // BUTTON FOR HIDE AND SHOW
+        $('input[name=checkbox]').change(function () {
+            if ($(this).is(':checked')) {
+                $(".col-md-3").show();
+                $(".col-md-9").css("width", "75%");
+            } else {
+                $(".col-md-3").hide();
+                $(".col-md-9").css("width", "100%");
+            }
+        });
+
+        $("#smallMenuForDesktop").hide();
+        $("#smallMenuForMobile").hide();
+
+        $("#menuHideButton").click(function () {
+            if (window.innerWidth >= 992) {
+                $("#rightSideWholeMenu").hide();
+
+                $(".col-md-3").css("width", "5%");
+                $(".col-md-3").css("text-align", "center");
+                $(".col-md-9").css("width", "95%");
+
+                $("#smallMenuForDesktop").show();
+                $("#smallMenuForMobile").hide();
+                status = "hide";
+            } else {
+                $("#rightSideWholeMenu").hide();
+
+                $(".col-md-3").css("width", "5%");
+                $(".col-md-3").css("text-align", "center");
+
+                $(".col-md-9").css("width", "100%");
+                $(".col-md-9").css("height", "calc(95vh - 10px - 50px)");
+                $("#openseadragonViewer").css("height", "calc(100vh - 10px - 50px)");
+
+                $("#smallMenuForDesktop").hide();
+                $("#smallMenuForMobile").show();
+                status = "hide";
+            }
+        });
+
+        $(".expendRightMenu").click(function () {
+            if (window.innerWidth >= 992) {
+                // alert("testtest");
+                $("#rightSideWholeMenu").show();
+
+                $(".col-md-9").css("width", "75%");
+                $(".col-md-3").css("text-align", "unset");
+                $(".col-md-3").css("width", "25%");
+
+                $("#smallMenuForDesktop").hide();
+                $("#smallMenuForMobile").hide();
+                status = "show";
+            } else {
+                $("#rightSideWholeMenu").show();
+
+                $(".col-md-9").css("height", "30vh");
+                $("#openseadragonViewer").css("height", "30vh");
+
+                $(".col-md-3").css("width", "100%");
+                $(".col-md-3").css("text-align", "unset");
+
+                $("#smallMenuForDesktop").hide();
+                $("#smallMenuForMobile").hide();
+                status = "show";
+            }
+        });
+
+        //Answer Submit
+        $("#submitBtn").on("click", function () {
+            $("#answerForm").submit();
+            alert("제출 완료");
+        })
+        //$(".slideFileName").each(function () {
+        //    original_name = $(this).text();
+        //    parse_original = original_name.split(" ")
+        //    //parse_original[1] = "{{qname}}"
+        //    parse_original[1] = ""
+        //    parse_original[parse_original.length - 1] = ""
+        //    $(this).text(parse_original.join(" "))
+        //})
+
+        //SelectBox Change 후 페이지 이동 - type 내 question
+        function selectBoxChange() {
+            var Question_Select = document.getElementById("Qlist_selBox");
+            var selectValue = Question_Select.options[Question_Select.selectedIndex].value;
+            location.href = selectValue
+        }
+
+
+        //SelectBox Change 후 페이지 이동 - type 이동
+        function selectBoxChange_type() {
+            var Type_Select = document.getElementById("which_type");
+            var selectValue = Type_Select.options[Type_Select.selectedIndex].value;
+            if(selectValue == "HE"){
+                location.href = "/3fZdPI9yvM57jt0x"
+            }
+            else{
+                location.href = "/89Of7hsvBr5X34Bb"
+            }
+        }
+
+        //next, prev 버튼 처리
+        $("#go_prev").on("click", function(){
+            var select = document.getElementById('Qlist_selBox');
+            console.log(select.selectedIndex);
+            if (select.selectedIndex==0){
+                alert("첫번째 문제입니다.");
+                return
+            }
+            select.selectedIndex--;
+            $("#Qlist_selBox").trigger("change");
+        })
+
+        
+        $("#go_next").on("click", function(){
+            var select = document.getElementById('Qlist_selBox');
+            if (select.selectedIndex==4){
+                alert("마지막 문제입니다.");
+                return
+            }
+            select.selectedIndex++;
+            $("#Qlist_selBox").trigger("change");
+        })
+
+
+    </script>
+
+    <script>
+        function openGuidePopup() {
+            window.open("/guide", "", "width=600, height=700, left=400");
+        }
+    </script>
+
+</body>
+
+</html>
