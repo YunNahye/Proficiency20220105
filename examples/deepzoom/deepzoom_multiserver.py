@@ -16,7 +16,7 @@ from sqlalchemy import text
 
 
 #SLIDE_DIR = 'E:/image_dir2/ISO_202010/2020'
-SLIDE_DIR = '//192.168.0.198/c/iso/2020'
+SLIDE_DIR = '//192.168.0.198/c/iso/2020' #수정필요
 #SLIDE_DIR = "//JHKANG-DEV/image_dir2/ISO_202010/2020"
 #SLIDE_DIR = '/home/ubuntu/images'
 #SLIDE_DIR = os.path.join('str(Path.home())', 'images') 
@@ -31,7 +31,7 @@ DEEPZOOM_TILE_QUALITY = 75
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('DEEPZOOM_MULTISERVER_SETTINGS', silent=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ydd1223@127.0.0.1:3306/proficiency_211105'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ydd1223@127.0.0.1:3306/proficiency_211105' #수정필요
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:1103@15.164.13.70:3306/proficiency'
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 app.secret_key = "b5aC869R"
