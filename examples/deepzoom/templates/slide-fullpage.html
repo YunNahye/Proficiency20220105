@@ -23,83 +23,39 @@
 <body style="zoom: 1; -ms-user-select: auto;">
 
     <!-- TOP SYSTEM NAVIGATION -->
-    <nav class="navbar navbar-default" style="border-top: 10px solid #989898;">
-        <div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="row" style="height: 50px; margin: 0; padding: 0;">
+            <div class="col-lg-9" style="height: auto;">
+                <div id="title" class="navbar-brand" style="font-weight: 900; margin-right: 1rem;">대한병리학회 ISO 15189 평가 -
+                    {{qname}} (id : {{username}})</div>
 
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/" style="padding: unset; padding: 1rem;">
-                    <img class="img-responsive brand-img"
-                        style="height: 3rem; -webkit-filter: contrast(4); filter: contrast(4); -webkit-filter: grayscale(100%); filter: grayscale(100%); -webkit-filter: opacity(.5); filter: opacity(.5)"
-                        src="{{ url_for('static', filename='images/pathology_black.png') }}" alt="">
-                </a>
 
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <div id="title" class="navbar-brand" style="font-weight: 900; margin-right: 1rem;">대한병리학회 ISO 15189 평가 - {{qname}} (id : {{username}})</div>
-
-                <!-- <a id="title" onclick="openGuidePopup();" class="navbar-brand"
-                        style="font-weight: 900; background-color: #989898; padding-top: 14px;">
-                        <span class="glyphicon glyphicon-eye-close"
-                            style="font-weight: 500; color: white; font-size: 1.5rem;"></span>
-                        <span style="font-weight: 700; color: white; font-size: 1.5rem;">이미지가 안보이시나요?</span>
-                    </a> -->
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left">
-                </form>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li onclick="openGuidePopup();" class="active"
-                            style="cursor: pointer; background-color: #989898;">
-                            <a style="background: #989898;">
-                                <span class="glyphicon glyphicon-eye-close"
-                                    style="font-weight: 500; color: white; font-size: 1.5rem;"></span>
-                                <span
-                                    style="font-family: 'NanumSquare'; font-weight: 900; color: white; font-size: 1.5rem;">이미지가
-                                    안보이시나요?</span>
-                            </a>
-                        </li>
-                        <li id="login"><a href="/login" style="font-weight: 900;">로그아웃</a></li>
-                    </ul>
+            <div class="col-lg-3" style="display: flex; justify-content: flex-end;" >
+                <ul class="nav navbar-nav" >
+                    <li onclick="openGuidePopup();" class="active" style="cursor: pointer; background-color: #989898;">
+                        <a style="background: #989898;">
+                            <span class="glyphicon glyphicon-eye-close"
+                                style="font-weight: 500; color: white; font-size: 1.5rem;"></span>
+                            <span
+                                style="font-family: 'NanumSquare'; font-weight: 900; color: white; font-size: 1.5rem;">이미지가
+                                안보이시나요?</span>
+                        </a>
+                    </li>
+                    <li id="login"><a href="/login" style="font-weight: 900;">로그아웃</a></li>
                 </ul>
-                <!-- <select id="which_type" onchange="selectBoxChange_type()"
-                    style="display:inline-block;width:150px;height:30px;margin-top:10px">
-                    {% if type=="HE" %}
-                    <option selected value='HE'>진단모듈 - 생검</option>
-                    <option value='HER'>진단모듈 - HER면역</option>
-                    {% else %}
-                    <option value='HE'>진단모듈 - 생검</option>
-                    <option selected value='HER'>진단모듈 - HER면역</option>
-                    {%endif%}
-                </select> -->
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
-
-
-
-
     </nav>
 
 
 
     <div class="row" style="margin: 0; padding: 0;">
         <!-- LEFT SIDE -->
-        <div class="col-md-9" style="position: relative;">
+        <div class="col-lg-9" style="">
 
             <div class="wrapper">
-                <div id="openseadragonViewer" style="background: white; height: 100%; position: relative;">
+                <div id="openseadragonViewer" style="background: white; height: 100%;  border-left: 1px solid rgb(136, 136, 136); position: relative;">
 
                 </div>
             </div>
@@ -108,7 +64,7 @@
         </div>
 
         <!-- RIGHT SIDE -->
-        <div class="col-md-3" style="position: relative; height: calc(100vh - 10px - 50px);">
+        <div class="col-lg-3" style="position: relative; padding: 0;     border-left: 1px solid rgb(136, 136, 136);height: calc(100vh - 10px - 50px);">
 
             <!-- SMALL MENU FOR DESKTOP -->
             <div id="smallMenuForDesktop" class="text-center"
@@ -152,19 +108,23 @@
             </div>
 
 
-            <div id="rightSideWholeMenu">
+            <div id="rightSideWholeMenu" style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        ">
 
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist" style="height: 44px;">
-                    <li id="description" role="presentation" class="viewerMenu active text-center" style="width: 84.5%">
-                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="font-weight: 900;">
-                            DESCRIPTION
+                <ul class="nav nav-tabs" class="text-center" role="tablist" style="height: 44px;">
+                    <li id="description" role="presentation" class="viewerMenu active text-center" style="width: 50%">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                            문제풀기
                         </a>
                     </li>
-
-                    <li class="viewerMenu active text-center" style="width: 15%;">
-                        <span id="menuHideButton" style="color: black; padding: 0.5rem; font-size: 2.5rem; top: 4px;"
-                            class="glyphicon glyphicon-log-in"></span>
+                    <li role="presentation" style="border-left: 1px solid #888;">
+                        <a href="#allQuestion" class="text-center" aria-controls="allQuestion" role="tab" data-toggle="tab">
+                            문항 전체보기
+                        </a>
                     </li>
                 </ul>
 
@@ -174,59 +134,9 @@
 
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingfour"
-                                    style="border-top: 1px solid #eee;">
-
-                                    <div style="float: left; color: black;">
-                                        <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
-                                            aria-controls="collapseFour">
-                                            <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
-                                            <span style="font-weight: 700; color: #737373;">QUESTION LIST</span>
-                                        </a>
-                                    </div>
-
-                                    <div style="float: right;">
-                                        <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
-                                            aria-controls="collapseFour">
-                                            <span class="label label-default"
-                                                style="cursor: pointer; font-weight: 900;">+</span>
-                                        </a>
-                                    </div>
-
-                                    <div style="clear: both;">
-                                    </div>
-
-                                </div>
+                            <div class="panel panel-default">
                                 <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel"
                                     aria-labelledby="headingfour">
-                                    <div class="panel-body" style="padding: 0.5rem; position: relative;">
-
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <button type = "button" id = "go_prev" class = "btn btn-primary btn-sm" style = "width:20%;margin-left:10%">PREV</button>
-                                                <select id="Qlist_selBox" onchange="selectBoxChange()"
-                                                    style="display:inline-block;width:40%;height:30px;margin:0 auto;text-align-last:center">
-                                                    {% for question in questionList %}
-                                                    {% if question.type == type %}
-
-                                                    {% if qid==question.qid %}
-                                                    <option selected value='/{{question.url}}'>{{question.name}}
-                                                    </option>
-                                                    {% else %}
-                                                    <option value='/{{question.url}}'>{{question.name}}</option>
-                                                    {% endif %}
-                                                    {% else %}
-                                                    {% endif %}
-
-                                                    {% endfor %}
-                                                </select>
-                                                <button type = "button" id = "go_next" class = "btn btn-primary btn-sm" style = "width:20%;">NEXT</button>
-                                            <li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
 
@@ -235,7 +145,7 @@
 
                                     <div style="float: left; color: black;">
                                         <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                                            data-target="#collapseThree" aria-expanded="true"
                                             aria-controls="collapseThree">
                                             <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
                                             <span style="font-weight: 700; color: #737373;">ANSWER</span>
@@ -244,10 +154,9 @@
 
                                     <div style="float: right;">
                                         <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                                            data-target="#collapseThree" aria-expanded="true"
                                             aria-controls="collapseThree">
-                                            <span class="label label-default"
-                                                style="cursor: pointer; font-weight: 900;">+</span> </a>
+                                        </a>
                                     </div>
 
                                     <div style="clear: both;">
@@ -265,20 +174,28 @@
 
                                                 {% if type =="HER2" %}
                                                 <div style="text-align: center">
-                                                    <input type="radio" name="question" id="question0" style="margin-left:15px" value="0"  {% if stored_answer=="0" %}checked{% endif %}></input> <label for="question0">0</label>
-                                                    <input type="radio" name="question" id="question1" style="margin-left:15px" value="1+" {% if stored_answer=="1+" %}checked{% endif %}></input> <label for="question1">1+</label>
-                                                    <input type="radio" name="question" id="question2" style="margin-left:15px" value="2+" {% if stored_answer=="2+" %}checked{% endif %}></input> <label for="question2">2+</label>
-                                                    <input type="radio" name="question" id="question3" style="margin-left:15px" value="3+" {% if stored_answer=="3+" %}checked{% endif %}></input> <label for="question3">3+</label>
+                                                    <input type="radio" name="question" id="question0"
+                                                        style="margin-left:15px" value="0" {% if stored_answer=="0"
+                                                        %}checked{% endif %}></input> <label for="question0">0</label>
+                                                    <input type="radio" name="question" id="question1"
+                                                        style="margin-left:15px" value="1+" {% if stored_answer=="1+"
+                                                        %}checked{% endif %}></input> <label for="question1">1+</label>
+                                                    <input type="radio" name="question" id="question2"
+                                                        style="margin-left:15px" value="2+" {% if stored_answer=="2+"
+                                                        %}checked{% endif %}></input> <label for="question2">2+</label>
+                                                    <input type="radio" name="question" id="question3"
+                                                        style="margin-left:15px" value="3+" {% if stored_answer=="3+"
+                                                        %}checked{% endif %}></input> <label for="question3">3+</label>
                                                 </div>
                                                 {% else %}
 
-                                                    {% if stored_answer!=None %}
-                                                    <textarea type="text" rows = 4 name="question"
-                                                        style="width: 250px;margin:0 auto">{{stored_answer}}</textarea>
-                                                    {% else %}
-                                                    <textarea type="text" rows = 4 name="question"
-                                                        style="width: 250px;margin:0 auto"></textarea>
-                                                    {% endif %}
+                                                {% if stored_answer!=None %}
+                                                <textarea type="text" rows=4 name="question"
+                                                    style="width: 250px;margin:0 auto">{{stored_answer}}</textarea>
+                                                {% else %}
+                                                <textarea type="text" rows=4 name="question"
+                                                    style="width: 250px;margin:0 auto"></textarea>
+                                                {% endif %}
 
                                                 {% endif %}
                                                 <input type="text" name="qid" value='{{qid}}'
@@ -302,8 +219,7 @@
 
                                     <div style="float: left; color: black;">
                                         <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                             <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
                                             <span style="font-weight: 700; color: #737373;">PATIENT HISTORY</span>
                                         </a>
@@ -311,10 +227,8 @@
 
                                     <div style="float: right;">
                                         <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            <span class="label label-default"
-                                                style="cursor: pointer; font-weight: 900;">+</span> </a>
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        </a>
                                     </div>
 
                                     <div style="clear: both;">
@@ -340,17 +254,13 @@
                                 </div>
                             </div>
 
-
-
-
-
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo"
                                     style="border-top: 1px solid #eee;">
 
                                     <div style="float: left; color: black;">
                                         <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                            data-target="#collapseTwo" aria-expanded="false"
                                             aria-controls="collapseTwo">
                                             <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
                                             <span style="font-weight: 700; color: #737373;">ANOTHER IMAGE LIST</span>
@@ -359,10 +269,9 @@
 
                                     <div style="float: right;">
                                         <a style="text-decoration: none; color: black;" role="button"
-                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                            data-target="#collapseTwo" aria-expanded="false"
                                             aria-controls="collapseTwo">
-                                            <span class="label label-default"
-                                                style="cursor: pointer; font-weight: 900;">+</span>
+
                                         </a>
                                     </div>
 
@@ -377,15 +286,16 @@
                                         <div class="row">
 
                                             {% for slide in slides %}
-                                            <div class="col-sm-6 col-md-6">
+                                            <div class="col-sm-4 col-md-4">
                                                 <div class="thumbnail">
                                                     <img src="{{ question_url+'/'+slide.name + '_files/8/0_0.jpeg'}}"
                                                         alt="{{slide_url_remove_dzi}}"
-                                                        style="min-height: 15rem; max-height: 15rem; min-width: 100%; object-fit: cover;"
+                                                        style="min-height: 10rem; max-height: 10rem; min-width: 100%; object-fit: cover;"
                                                         onclick="changeViewer('{{ question_url+'/'+slide.name }}', '{{ slide.meta_data }}');">
                                                     <div class="caption text-center">
                                                         <span class="slideFileName"
-                                                            style="text-overflow: ellipsis; overflow: hidden; display: block; white-space: nowrap;">{{ loop.index}}{{". "}}{{slide.name.split(" ")[-2]}}</span>
+                                                            style="text-overflow: ellipsis; overflow: hidden; display: block; white-space: nowrap;">{{
+                                                            loop.index}}{{". "}}{{slide.name.split(" ")[-2]}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -396,35 +306,74 @@
                                 </div>
                             </div>
 
-
-
-
-
-
-
                         </div>
 
                     </div>
+                    <div role="tabpanel" class="tab-pane" style="text-align: center;" id="allQuestion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+
+                                <div style="float: left; color: black;">
+                                    <a style="text-decoration: none; color: black;" role="button"
+                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <span style="color: #737373;" class="glyphicon glyphicon-time"></span>
+                                        <span style="font-weight: 700; color: #737373;">전체문항보기</span>
+                                    </a>
+                                </div>
+
+                                <div style="float: right;">
+                                    <a style="text-decoration: none; color: black;" role="button"
+                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    </a>
+                                </div>
+
+                                <div style="clear: both;">
+                                </div>
+
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                aria-labelledby="headingOne">
+
+                                <div class="panel-body">
+                                    문제 리스트
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="text-center center-block"
-                    style="padding-top: 5px; padding-bottom: 5px; max-height: 40px; filter: alpha(opacity=70); opacity: 0.7; left: 50%; transform: translateX(-50%); position: absolute; width: 300px;">
+                <div class="text-center center-block" style="width: 100%;">
 
+                    <ul class="list-unstyled">
+                        <li>
+                            <button type="button" id="go_prev" class="btn btn-primary btn-sm"
+                                style="width:45%;  padding:10px 15px;">PREV</button>
+                            <select id="Qlist_selBox" onchange="selectBoxChange()"
+                                style="display:none;width:40%;height:30px;margin:0 auto;text-align-last:center">
+                                {% for question in questionList %}
+                                {% if question.type == type %}
+
+                                {% if qid==question.qid %}
+                                <option selected value='/{{question.url}}'>{{question.name}}
+                                </option>
+                                {% else %}
+                                <option value='/{{question.url}}'>{{question.name}}</option>
+                                {% endif %}
+                                {% else %}
+                                {% endif %}
+
+                                {% endfor %}
+                            </select>
+                            <button type="button" id="go_next" class="btn btn-primary btn-sm"
+                                style="width:45%; padding:10px 15px;">NEXT</button>
+                        <li>
+                    </ul>
                     <div class="text-center"
+                        style="padding-top: 5px; padding-bottom: 5px; max-height: 40px; filter: alpha(opacity=70); opacity: 0.7;"
                         style="margin-bottom: unset; font-size: 1rem; font-family: 'NanumSquare', sans-serif; font-weight: 700;">
 
-                        <div style="min-height: 100%; float: left; width: 53%; border-right: 1px solid #aaaaaa;">
-                            <img class="img-responsive center-block"
-                                style="height: 2.5rem; -webkit-filter: opacity(.5); filter: opacity(.5)"
-                                src="{{ url_for('static', filename='images/pathology_black_fixed_2_ultra.png') }}"
-                                alt="">
-                        </div>
 
-                        <div style="min-height: 100%; float: left; width: 46%;">
-                            <img class="img-responsive center-block"
-                                style="height: 2.5rem; -webkit-filter: contrast(4); filter: contrast(4); -webkit-filter: grayscale(100%); filter: grayscale(100%); -webkit-filter: opacity(.7); filter: opacity(.7);"
-                                src="{{ url_for('static', filename='images/logo_humintec_5.png') }}" alt="">
-                        </div>
 
                         <div style="clear: both;">
                         </div>
@@ -720,19 +669,19 @@
         function selectBoxChange_type() {
             var Type_Select = document.getElementById("which_type");
             var selectValue = Type_Select.options[Type_Select.selectedIndex].value;
-            if(selectValue == "HE"){
+            if (selectValue == "HE") {
                 location.href = "/3fZdPI9yvM57jt0x"
             }
-            else{
+            else {
                 location.href = "/89Of7hsvBr5X34Bb"
             }
         }
 
         //next, prev 버튼 처리
-        $("#go_prev").on("click", function(){
+        $("#go_prev").on("click", function () {
             var select = document.getElementById('Qlist_selBox');
             console.log(select.selectedIndex);
-            if (select.selectedIndex==0){
+            if (select.selectedIndex == 0) {
                 alert("첫번째 문제입니다.");
                 return
             }
@@ -740,10 +689,10 @@
             $("#Qlist_selBox").trigger("change");
         })
 
-        
-        $("#go_next").on("click", function(){
+
+        $("#go_next").on("click", function () {
             var select = document.getElementById('Qlist_selBox');
-            if (select.selectedIndex==4){
+            if (select.selectedIndex == 4) {
                 alert("마지막 문제입니다.");
                 return
             }
